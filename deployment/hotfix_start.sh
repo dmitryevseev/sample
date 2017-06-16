@@ -3,7 +3,6 @@
 set -e
 
 cd "${PWD}"/../ || true
-
 VERSION=$1
 if [ -z "$1" ]
 then
@@ -11,9 +10,17 @@ then
   exit 1
 fi
 
-# Initialize gitflow
+# ensure you are on latest develop  & master
+git checkout master
+git pull origin master
+
+git checkout develop
+git pull origin develop
+
+#Initialize gitflow
 git flow init -f -d
-git flow hotfix start --fetch "$VERSION"
+
+git flow hotfix start "$VERSION"
 
 NEXTVERSION=$(./bump-patchversion.sh)
 ./bump-version.sh "$NEXTVERSION"
