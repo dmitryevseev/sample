@@ -13,7 +13,7 @@ fi
 
 # Initialize gitflow
 git flow init -f -d
-git flow hotfix start -F "$VERSION"
+git flow hotfix start --ff-master "$VERSION"
 
 NEXTVERSION=$(./bump-patchversion.sh)
 ./bump-version.sh "$NEXTVERSION"
